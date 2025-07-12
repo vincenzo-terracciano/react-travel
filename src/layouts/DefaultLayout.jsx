@@ -9,7 +9,7 @@ export default function DefaultLayout() {
         <>
             <div className="d-flex flex-column min-vh-100">
                 <Header />
-                <main className="container py-4 flex-grow-1">
+                <main>
                     <Outlet />
                 </main>
                 <Footer />

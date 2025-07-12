@@ -3,6 +3,7 @@
 
 :root {
     --brand-primary: #0077b6;
+    --brand-primary-dark: #005f8c;
     --text-main: #333;
     --text-muted: #bbb;
     --text-light: #eee;
@@ -133,4 +134,75 @@ footer .social-icons a {
     color: var(--bg-header);
     margin-left: 0.8rem;
     font-size: 1.25rem;
+}
+
+/* Homepage */
+.hero {
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    transition: background-image 1s ease-in-out;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.hero .btn {
+    position: relative;
+    z-index: 2;
+}
+
+.highlights i {
+    color: var(--brand-primary);
+}
+
+.cta {
+    background-color: var(--bg-main);
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-primary-dark);
+}
+
+.btn-outline-primary {
+    border: 1px solid var(--brand-primary);
+    color: var(--brand-primary);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--brand-primary);
+    border: 1px solid var(--brand-primary);
+    color: white;
 }
