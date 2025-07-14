@@ -6,9 +6,9 @@ export default function Home() {
     return (
         <>
             <div className="home">
+
                 <Hero />
 
-                {/* Highlights */}
                 <section className="highlights py-5">
                     <div className="container text-center">
                         <h2 className="mb-4">Cosa troverai</h2>
@@ -32,8 +32,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* Call to Action */}
-                <section className="cta text-center py-5 bg-light">
+                <section className="text-center py-5">
                     <div className="container">
                         <h3>Inizia il tuo prossimo viaggio ora</h3>
                         <Link to="/destinazioni" className="btn btn-outline-primary mt-3">Vai alle destinazioni</Link>

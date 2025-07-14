@@ -19,10 +19,14 @@ export default function Hero() {
         return () => clearInterval(interval);
     }, []);
 
+    const goToSlide = (newIndex) => setIndex(newIndex);
+    const prevSlide = () => setIndex((index - 1 + images.length) % images.length);
+    const nextSlide = () => setIndex((index + 1) % images.length);
+
     return (
         <>
             <section className="hero text-white d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(/img/${images[index]})` }}>
-                <div className="container text-center">
+                <div className="container text-center hero-content">
                     <h1 className="hero-title">Esplora il mondo con VoyaGo</h1>
                     <p className="hero-subtitle">Itinerari personalizzati, packing list e destinazioni da sogno</p>
                     <Link to="/viaggi" className="btn btn-primary">Scopri i viaggi</Link>
