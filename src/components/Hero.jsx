@@ -29,7 +29,7 @@ export default function Hero() {
                 <div className="container text-center hero-content">
                     <h1 className="hero-title">Esplora il mondo con VoyaGo</h1>
                     <p className="hero-subtitle">Itinerari personalizzati, packing list e destinazioni da sogno</p>
-                    <Link to="/viaggi" className="btn btn-primary">Scopri i viaggi</Link>
+                    <Link to="/travels" className="btn btn-primary">Scopri i viaggi</Link>
                 </div>
             </section>
         </>

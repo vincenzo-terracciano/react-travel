@@ -27,7 +27,7 @@ export default function Header() {
                             <Link className="nav-item" to="/">Home</Link>
                         </li>
                         <li>
-                            <Link className="nav-item" to="/viaggi">Viaggi</Link>
+                            <Link className="nav-item" to="/travels">Viaggi</Link>
                         </li>
                         <li>
                             <Link className="nav-item" to="/itinerari">Itinerari</Link>
