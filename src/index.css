@@ -320,6 +320,16 @@ footer .social-icons a {
     border-radius: 1.5rem 1.5rem 0 0;
 }
 
+.hover-zoom {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-zoom:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--badge-primary);
+}
+
 /* Spinner */
 .custom-loader-container {
     display: flex;
@@ -345,6 +355,65 @@ footer .social-icons a {
 }
 
 
+
+
+
+
+
+
+/* Itinerary */
+.badge {
+    background-color: var(--brand-primary);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    border-left: 4px solid var(--brand-primary);
+    padding-left: 1.5rem;
+    background-color: var(--bg-header);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 30%;
+    width: 16px;
+    height: 16px;
+    background-color: var(--brand-primary);
+    border-radius: 50%;
+    border: 3px solid var(--bg-header);
+    box-shadow: 0 0 0 2px var(--brand-primary);
+    transition: background-color 0.2s ease;
+}
+
+.timeline-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 100%;
+    width: 4px;
+    height: 100%;
+    background-color: var(--brand-primary);
+}
+
+@media (max-width: 576px) {
+
+    .timeline-item::before {
+        width: 12px;
+        height: 12px;
+        left: -8px;
+    }
+}
 
 
 

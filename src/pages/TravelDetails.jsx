@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
 import { useGlobalContext } from "../context/GlobalContext";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
@@ -7,6 +7,18 @@ export default function TravelDetails() {
 
     const { id } = useParams();
     const { selectedTravel, setSelectedTravel, fetchTravelById, getTravelDuration, loading } = useGlobalContext();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // funzione per il toggle
+    function handleToggleSection(section) {
+        if (location.pathname.endsWith(`/${section}`)) {
+            navigate(`/travels/${id}`); // torna indietro se sei già dentro
+        } else {
+            navigate(section); // altrimenti entra
+        }
+    };
 
     useEffect(() => {
         fetchTravelById(id);
@@ -38,7 +50,7 @@ export default function TravelDetails() {
         <>
             <div className="container py-5">
                 <Link to="/travels" className="custom-btn mb-4">
-                    <i class="fas fa-arrow-left me-1"></i> Torna ai viaggi
+                    <i className="fas fa-arrow-left me-1"></i> Torna ai viaggi
                 </Link>
 
                 <div className="card border-0 shadow travel-card mt-4">
@@ -67,18 +79,45 @@ export default function TravelDetails() {
 
                         <p className="lead">{description}</p>
 
-                        <div className="mt-4 mb-4 d-flex gap-3 flex-wrap">
-                            <Link to="itinerary" className="btn btn-outline-primary">🗺️ Itinerario</Link>
-                            <Link to="places" className="btn btn-outline-success">📍 Luoghi</Link>
-                            <Link to="packing" className="btn btn-outline-warning">🎒 Valigia</Link>
-                            <Link to="gallery" className="btn btn-outline-info">📸 Galleria</Link>
+                        <div className="row row-cols-2 row-cols-md-4 g-3 mt-4">
+                            <div className="col">
+                                <div onClick={() => handleToggleSection("itinerary")} className="section-card text-decoration-none">
+                                    <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
+                                        <i className="fas fa-map-marked-alt fa-2x mb-2 text-primary"></i>
+                                        <h6 className="mb-0">Itinerario</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col">
+                                <Link to="places" className="section-card text-decoration-none">
+                                    <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
+                                        <i className="fas fa-map-pin fa-2x mb-2 text-danger"></i>
+                                        <h6 className="mb-0">Luoghi</h6>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="col">
+                                <Link to="packing" className="section-card text-decoration-none">
+                                    <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
+                                        <i className="fas fa-suitcase-rolling fa-2x mb-2 text-warning"></i>
+                                        <h6 className="mb-0">Valigia</h6>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="col">
+                                <Link to="gallery" className="section-card text-decoration-none">
+                                    <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
+                                        <i className="fas fa-camera-retro fa-2x mb-2 text-info"></i>
+                                        <h6 className="mb-0">Galleria</h6>
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
-            );
+
+            <Outlet />
         </>
     )
 }
