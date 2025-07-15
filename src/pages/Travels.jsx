@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext"
 import { useEffect } from "react";
+import Loader from "../components/Loader";
 
 export default function Travels() {
 
-    const { travels, fetchTravels, currentPage, setCurrentPage, lastPage } = useGlobalContext();
+    const { travels, fetchTravels, currentPage, setCurrentPage, lastPage, loading } = useGlobalContext();
 
     useEffect(() => {
         fetchTravels(currentPage);
@@ -16,6 +17,10 @@ export default function Travels() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
+
+    if (loading || !travels) {
+        return <Loader />;
+    }
 
     return (
         <>
@@ -38,7 +43,10 @@ export default function Travels() {
                                         {travel.destination_city}, {travel.destination_country}
                                     </p>
                                     <span className="category-badge align-self-start mb-3">
-                                        {travel.category?.name}
+                                        {travel.category?.icon && (
+                                            <i className={`${travel.category.icon} me-2`}></i>
+                                        )}
+                                        <span>{travel.category?.name}</span>
                                     </span>
                                     <Link
                                         to={`/travels/${travel.id}`}

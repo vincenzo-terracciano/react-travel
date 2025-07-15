@@ -10,8 +10,12 @@ export default function GlobalProvider({ children }) {
     const [travels, setTravels] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
+    const [selectedTravel, setSelectedTravel] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const fetchTravels = (page = 1) => {
+    function fetchTravels(page = 1) {
+        setLoading(true);
+
         axios.get(`${baseURL}/travels?page=${page}`)
             .then(res => {
                 console.log(res);
@@ -22,11 +26,37 @@ export default function GlobalProvider({ children }) {
             .catch(err => {
                 console.error("Errore nel recupero dei viaggi", err);
             })
+            .finally(() => {
+                setLoading(false);
+            })
     };
 
     useEffect(() => {
         fetchTravels();
     }, [])
+
+    function fetchTravelById(id) {
+        setLoading(true);
+
+        axios.get(`${baseURL}/travels/${id}`)
+            .then(res => {
+                setSelectedTravel(res.data.data);
+            })
+            .catch(err => {
+                console.error("Errore nel recupero del viaggio", err);
+            })
+            .finally(() => {
+                setLoading(false);
+            })
+    }
+
+    // funzione per calcolare la durata del viaggio
+    function getTravelDuration(start, end) {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const diff = (endDate - startDate) / (1000 * 60 * 60 * 24);
+        return diff + 1
+    }
 
     return (
         <>
@@ -36,7 +66,13 @@ export default function GlobalProvider({ children }) {
                 fetchTravels,
                 currentPage,
                 setCurrentPage,
-                lastPage
+                lastPage,
+                selectedTravel,
+                setSelectedTravel,
+                fetchTravelById,
+                getTravelDuration,
+                loading,
+                setLoading,
             }}>
                 {children}
             </GlobalContext.Provider>
