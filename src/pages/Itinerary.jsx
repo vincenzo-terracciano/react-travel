@@ -40,7 +40,8 @@ export default function Itinerary() {
                                         </small>
                                     )}
                                 </div>
-                                <h5 className="fw-semibold">{step.title}</h5>
+                                <h5>{step.title}</h5>
+                                <span className="activity-type category-badge type mb-2">{step.activity_type}</span>
                                 {place && <p className="text-muted mb-1"><i className="fas fa-map-marker-alt me-1 text-danger"></i>{place.name}</p>}
                                 <p className="mb-0">{step.description}</p>
                             </div>

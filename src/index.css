@@ -16,6 +16,7 @@
     --border-default: #ddd;
     --border-dark: #444;
     --badge-primary: #e0f4ff;
+    --badge-secondary: #aee3ff;
 }
 
 * {
@@ -211,6 +212,14 @@ footer .social-icons a {
     color: white;
 }
 
+.place-card .btn-outline-primary {
+    font-size: 0.85rem;
+}
+
+.btn-sm {
+    font-size: 11px;
+}
+
 /* Travels */
 .card-img-container {
     overflow: hidden;
@@ -354,16 +363,14 @@ footer .social-icons a {
     }
 }
 
-
-
-
-
-
-
-
 /* Itinerary */
 .badge {
     background-color: var(--brand-primary);
+}
+
+.activity-type {
+    background-color: var(--badge-secondary);
+    color: var(--brand-primary-dark);
 }
 
 .timeline {
@@ -406,13 +413,20 @@ footer .social-icons a {
     background-color: var(--brand-primary);
 }
 
-@media (max-width: 576px) {
+/* Places */
+.place-card {
+    border: none;
+    border-radius: 1rem;
 
-    .timeline-item::before {
-        width: 12px;
-        height: 12px;
-        left: -8px;
-    }
+    transition: all 0.3s ease;
+    min-height: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.place-img {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
 }
 
 
@@ -424,6 +438,25 @@ footer .social-icons a {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+
+    .timeline-item::before {
+        width: 12px;
+        height: 12px;
+        left: -8px;
+    }
+}
 
 @media (max-width: 768px) {
 

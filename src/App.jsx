@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Travels from "./pages/Travels"
 import TravelDetails from "./pages/TravelDetails"
 import Itinerary from "./pages/Itinerary"
+import Places from "./pages/Places"
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
               <Route path="/travels" Component={Travels} />
               <Route path="/travels/:id" Component={TravelDetails}>
                 <Route path="itinerary" Component={Itinerary} />
+                <Route path="places" Component={Places} />
+                <Route path="packing-items" Component={Places} />
+                <Route path="photos" Component={Places} />
               </Route>
             </Route>
           </Routes>

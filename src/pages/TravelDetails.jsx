@@ -89,28 +89,28 @@ export default function TravelDetails() {
                                 </div>
                             </div>
                             <div className="col">
-                                <Link to="places" className="section-card text-decoration-none">
+                                <div onClick={() => handleToggleSection("places")} className="section-card text-decoration-none">
                                     <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
                                         <i className="fas fa-map-pin fa-2x mb-2 text-danger"></i>
                                         <h6 className="mb-0">Luoghi</h6>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                             <div className="col">
-                                <Link to="packing" className="section-card text-decoration-none">
+                                <div onClick={() => handleToggleSection("packing-items")} className="section-card text-decoration-none">
                                     <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
                                         <i className="fas fa-suitcase-rolling fa-2x mb-2 text-warning"></i>
                                         <h6 className="mb-0">Valigia</h6>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                             <div className="col">
-                                <Link to="gallery" className="section-card text-decoration-none">
+                                <div onClick={() => handleToggleSection("photos")} className="section-card text-decoration-none">
                                     <div className="card shadow-sm text-center p-3 h-100 hover-zoom">
                                         <i className="fas fa-camera-retro fa-2x mb-2 text-info"></i>
                                         <h6 className="mb-0">Galleria</h6>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
