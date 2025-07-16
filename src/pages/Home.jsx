@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
+import { useEffect } from "react";
 
 export default function Home() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scrolla in alto quando la pagina viene caricata
+    }, []);
 
     return (
         <>

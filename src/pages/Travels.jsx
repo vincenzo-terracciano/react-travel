@@ -1,22 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext"
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 
 export default function Travels() {
 
-    const { travels, fetchTravels, currentPage, setCurrentPage, lastPage, loading } = useGlobalContext();
+    const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter } = useGlobalContext();
+    const location = useLocation();
+
+    const travelsPerPage = 6;
+    const filteredTravels = selectedCategory
+        ? travels.filter(travel => travel.category?.name === selectedCategory)
+        : travels.slice((currentPage - 1) * travelsPerPage, currentPage * travelsPerPage);
+
 
     useEffect(() => {
-        fetchTravels(currentPage);
-    }, [currentPage]);
+        fetchTravels();
+    }, []);
 
-    const handlePageChange = (page) => {
-        if (page >= 1 && page <= lastPage) {
-            setCurrentPage(page);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+    useEffect(() => {
+        if (location.state?.selectedCategory) {
+            setSelectedCategory(location.state.selectedCategory);
         }
-    };
+    }, [location.state])
+
 
     if (loading || !travels) {
         return <Loader />;
@@ -26,8 +33,22 @@ export default function Travels() {
         <>
             <div className="container py-5">
                 <h1 className="mb-5 text-center fw-bold">Esplora i Viaggi</h1>
+
+                {selectedCategory && (
+                    <div className="text-center mb-4">
+                        <p className="fs-5">
+                            Viaggi filtrati per Categoria: <strong>{selectedCategory}</strong>
+                        </p>
+                        <button
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => setSelectedCategory(null)}>
+                            Rimuovi filtro
+                        </button>
+                    </div>
+                )}
+
                 <div className="row g-4">
-                    {travels.map((travel) => (
+                    {filteredTravels.map((travel) => (
                         <div key={travel.id} className="col-12 col-md-6 col-lg-4">
                             <div className="card shadow-sm border-0 h-100 travel-card">
                                 <div className="card-img-container">
@@ -42,7 +63,8 @@ export default function Travels() {
                                     <p className="card-text mb-2">
                                         {travel.destination_city}, {travel.destination_country}
                                     </p>
-                                    <span className="category-badge align-self-start mb-3">
+                                    <span className="category-badge category-badge-clickable align-self-start mb-3"
+                                        onClick={() => handleCategoryFilter(travel.category?.name)}>
                                         {travel.category?.icon && (
                                             <i className={`${travel.category.icon} me-2`}></i>
                                         )}
@@ -60,25 +82,27 @@ export default function Travels() {
                 </div>
 
                 {/* Paginazione */}
-                <div className="d-flex justify-content-center mt-5">
-                    <ul className="pagination-custom">
-                        <li onClick={() => handlePageChange(currentPage - 1)} className={currentPage === 1 ? 'disabled' : ''}>
-                            &laquo;
-                        </li>
-                        {Array.from({ length: lastPage }, (_, i) => (
-                            <li
-                                key={i + 1}
-                                onClick={() => handlePageChange(i + 1)}
-                                className={currentPage === i + 1 ? 'active' : ''}
-                            >
-                                {i + 1}
+                {!selectedCategory && (
+                    <div className="d-flex justify-content-center mt-5">
+                        <ul className="pagination-custom">
+                            <li onClick={() => handlePageChange(currentPage - 1)} className={currentPage === 1 ? 'disabled' : ''}>
+                                &laquo;
                             </li>
-                        ))}
-                        <li onClick={() => handlePageChange(currentPage + 1)} className={currentPage === lastPage ? 'disabled' : ''}>
-                            &raquo;
-                        </li>
-                    </ul>
-                </div>
+                            {Array.from({ length: lastPage }, (_, i) => (
+                                <li
+                                    key={i + 1}
+                                    onClick={() => handlePageChange(i + 1)}
+                                    className={currentPage === i + 1 ? 'active' : ''}
+                                >
+                                    {i + 1}
+                                </li>
+                            ))}
+                            <li onClick={() => handlePageChange(currentPage + 1)} className={currentPage === lastPage ? 'disabled' : ''}>
+                                &raquo;
+                            </li>
+                        </ul>
+                    </div>
+                )}
             </div>
         </>
     )

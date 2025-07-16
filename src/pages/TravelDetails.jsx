@@ -60,9 +60,9 @@ export default function TravelDetails() {
                         <h2 className="fw-bold">{title}</h2>
                         <p className="text-muted mb-3">{destination_city}, {destination_country}</p>
 
-                        <span className="category-badge mb-3 d-inline-block">
+                        <Link to="/travels" state={{ selectedCategory: category?.name }} className="category-badge category-badge-clickable mb-3 d-inline-block text-decoration-none">
                             <i className={`${category.icon} me-2`}></i>{category?.name}
-                        </span>
+                        </Link>
 
                         <p className="text-muted mb-3">
                             <strong>Durata:</strong> {getTravelDuration(selectedTravel.departure_date, selectedTravel.return_date)} giorni<br />

@@ -259,6 +259,18 @@ footer .social-icons a {
     letter-spacing: 0.5px;
 }
 
+.category-badge-clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-badge-clickable:hover {
+    background-color: var(--brand-primary);
+    color: var(--bg-header);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
 .card-title {
     font-size: 1.2rem;
 }
