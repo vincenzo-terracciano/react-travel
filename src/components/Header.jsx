@@ -30,13 +30,7 @@ export default function Header() {
                             <Link className="nav-item" to="/travels">Viaggi</Link>
                         </li>
                         <li>
-                            <Link className="nav-item" to="/itinerari">Itinerari</Link>
-                        </li>
-                        <li>
-                            <Link className="nav-item" to="/packing-list">Packing List</Link>
-                        </li>
-                        <li>
-                            <Link className="nav-item" to="/destinazioni">Destinazioni</Link>
+                            <Link className="nav-item" to="/categories">Categorie</Link>
                         </li>
                     </ul>
                 </nav>

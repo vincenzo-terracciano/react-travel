@@ -6,6 +6,8 @@ import Travels from "./pages/Travels"
 import TravelDetails from "./pages/TravelDetails"
 import Itinerary from "./pages/Itinerary"
 import Places from "./pages/Places"
+import PackingItems from "./pages/PackingItems"
+import Photos from "./pages/Photos"
 
 
 function App() {
@@ -23,8 +25,8 @@ function App() {
               <Route path="/travels/:id" Component={TravelDetails}>
                 <Route path="itinerary" Component={Itinerary} />
                 <Route path="places" Component={Places} />
-                <Route path="packing-items" Component={Places} />
-                <Route path="photos" Component={Places} />
+                <Route path="packing-items" Component={PackingItems} />
+                <Route path="photos" Component={Photos} />
               </Route>
             </Route>
           </Routes>
