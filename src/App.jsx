@@ -18,12 +18,9 @@ import Partnership from "./pages/Partnership"
 import Faq from "./pages/Faq"
 import Assistance from "./pages/Assistance"
 import CustomerCare from "./pages/CustomerCare"
-import Help from "./pages/Help"
 
 
 function App() {
-
-
 
   return (
     <>

@@ -83,6 +83,7 @@ export default function GlobalProvider({ children }) {
 
     function handleCategoryFilter(categoryName) {
         setSelectedCategory(categoryName);
+        window.scrollTo({ top: 120, behavior: 'smooth' });
     };
 
     function toggleWishlist(id) {
