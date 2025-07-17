@@ -15,6 +15,8 @@ export default function GlobalProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [sortOrder, setSortOrder] = useState("desc");
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
     const [wishlist, setWishlist] = useState(() => {
         return JSON.parse(localStorage.getItem("wishlist")) || [];
     });
@@ -117,7 +119,11 @@ export default function GlobalProvider({ children }) {
                 setSortOrder,
                 wishlist,
                 setWishlist,
-                toggleWishlist
+                toggleWishlist,
+                selectedCountry,
+                setSelectedCountry,
+                searchQuery,
+                setSearchQuery,
             }}>
                 {children}
             </GlobalContext.Provider>

@@ -5,11 +5,11 @@ import Loader from "../components/Loader";
 
 export default function Travels() {
 
-    const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter, sortOrder, setSortOrder, wishlist, setWishlist, toggleWishlist } = useGlobalContext();
+    const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter, sortOrder, setSortOrder, wishlist, toggleWishlist, searchQuery, setSearchQuery } = useGlobalContext();
     const location = useLocation();
-
-    /* Filtro e ordinamento */
     const travelsPerPage = 6;
+
+    /* Filtro, ordinamento e ricerca */
     const filteredTravels = selectedCategory
         ? travels.filter(travel => travel.category?.name === selectedCategory)
         : travels;
@@ -21,7 +21,19 @@ export default function Travels() {
             : new Date(a.created_at) - new Date(b.created_at);
     })
 
-    const paginatedTravels = sortedTravels.slice((currentPage - 1) * travelsPerPage, currentPage * travelsPerPage);
+    const searchedTravels = sortedTravels.filter(travel =>
+        travel.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        travel.destination_city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        travel.destination_country.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const paginatedTravels = searchedTravels.slice(
+        (currentPage - 1) * travelsPerPage,
+        currentPage * travelsPerPage
+    );
+
+    /* Categorie dinamiche */
+    const categories = [...new Set(travels.map(travel => travel.category?.name).filter(Boolean))];
 
     useEffect(() => {
         fetchTravels();
@@ -43,7 +55,30 @@ export default function Travels() {
             <div className="container py-5">
                 <h1 className="mb-5 text-center fw-bold">Esplora i Viaggi</h1>
 
-                <div className="d-flex justify-content-end mb-4">
+                <div className="d-flex justify-content-between mb-4">
+                    <select
+                        className="form-select w-auto"
+                        value={selectedCategory || ""}
+                        onChange={(e) => setSelectedCategory(e.target.value || null)}>
+                        <option value="">Tutte le categorie</option>
+                        {categories.map((cat, index) => (
+                            <option key={index} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+
+                    {/* Search bar */}
+                    <div className="search-bar-container">
+                        <i className="fas fa-search search-icon"></i>
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Cerca viaggio..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </div>
+
+
                     <select
                         className="form-select w-auto"
                         value={sortOrder}
@@ -69,7 +104,7 @@ export default function Travels() {
                 <div className="row g-4">
                     {paginatedTravels.map((travel) => (
                         <div key={travel.id} className="col-12 col-md-6 col-lg-4">
-                            <div className="card shadow-sm border-0 h-100 travel-card position-relative">
+                            <div className="card border-0 h-100 travel-card position-relative">
                                 <div className="wishlist-icon" onClick={() => toggleWishlist(travel.id)}>
                                     <i className={wishlist.includes(travel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
                                 </div>

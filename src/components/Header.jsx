@@ -32,6 +32,9 @@ export default function Header() {
                             <Link className="nav-item" to="/travels">Viaggi</Link>
                         </li>
                         <li>
+                            <Link className="nav-item" to="/destinations">Destinazioni</Link>
+                        </li>
+                        <li>
                             <NavLink to="/wishlist" className="nav-item wishlist-button">
                                 <i className={wishlist.length > 0 ? "fas fa-heart" : "far fa-heart"}></i>
                                 {wishlist.length > 0 && (

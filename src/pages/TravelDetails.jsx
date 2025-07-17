@@ -56,12 +56,12 @@ export default function TravelDetails() {
 
     return (
         <>
-            <div className="container py-5">
+            <div className="container py-5 no-hover">
                 <Link to="/travels" className="custom-btn mb-4">
                     <i className="fas fa-arrow-left me-1"></i> Torna ai viaggi
                 </Link>
 
-                <div className="card border-0 shadow travel-card mt-4 position-relative">
+                <div className="card border-0 travel-card mt-4 position-relative">
 
                     <div className="wishlist-icon" onClick={() => toggleWishlist(selectedTravel.id)}>
                         <i className={wishlist.includes(selectedTravel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>

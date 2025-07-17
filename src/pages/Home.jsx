@@ -40,7 +40,7 @@ export default function Home() {
                 <section className="text-center py-5">
                     <div className="container">
                         <h3>Inizia il tuo prossimo viaggio ora</h3>
-                        <Link to="/destinazioni" className="btn btn-outline-primary mt-3">Vai alle destinazioni</Link>
+                        <Link to="/destinations" className="btn btn-outline-primary mt-3">Vai alle destinazioni</Link>
                     </div>
                 </section>
             </div>
