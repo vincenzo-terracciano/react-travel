@@ -49,11 +49,6 @@ export default function GlobalProvider({ children }) {
         getPage();
     }
 
-
-    useEffect(() => {
-        fetchTravels();
-    }, [])
-
     function fetchTravelById(id) {
         setLoading(true);
 
