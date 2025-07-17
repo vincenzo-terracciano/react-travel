@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function Home() {
 
     useEffect(() => {
-        window.scrollTo(0, 0); // Scrolla in alto quando la pagina viene caricata
+        window.scrollTo(0, 0);
     }, []);
 
     return (

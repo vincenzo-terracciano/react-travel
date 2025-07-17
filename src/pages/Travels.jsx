@@ -5,14 +5,23 @@ import Loader from "../components/Loader";
 
 export default function Travels() {
 
-    const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter } = useGlobalContext();
+    const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter, sortOrder, setSortOrder, wishlist, setWishlist, toggleWishlist } = useGlobalContext();
     const location = useLocation();
 
+    /* Filtro e ordinamento */
     const travelsPerPage = 6;
     const filteredTravels = selectedCategory
         ? travels.filter(travel => travel.category?.name === selectedCategory)
-        : travels.slice((currentPage - 1) * travelsPerPage, currentPage * travelsPerPage);
+        : travels;
 
+
+    const sortedTravels = [...filteredTravels].sort((a, b) => {
+        return sortOrder === "desc"
+            ? new Date(b.created_at) - new Date(a.created_at)
+            : new Date(a.created_at) - new Date(b.created_at);
+    })
+
+    const paginatedTravels = sortedTravels.slice((currentPage - 1) * travelsPerPage, currentPage * travelsPerPage);
 
     useEffect(() => {
         fetchTravels();
@@ -34,6 +43,16 @@ export default function Travels() {
             <div className="container py-5">
                 <h1 className="mb-5 text-center fw-bold">Esplora i Viaggi</h1>
 
+                <div className="d-flex justify-content-end mb-4">
+                    <select
+                        className="form-select w-auto"
+                        value={sortOrder}
+                        onChange={(e) => setSortOrder(e.target.value)}>
+                        <option value="desc">Più recenti</option>
+                        <option value="asc">Meno recenti</option>
+                    </select>
+                </div>
+
                 {selectedCategory && (
                     <div className="text-center mb-4">
                         <p className="fs-5">
@@ -48,9 +67,13 @@ export default function Travels() {
                 )}
 
                 <div className="row g-4">
-                    {filteredTravels.map((travel) => (
+                    {paginatedTravels.map((travel) => (
                         <div key={travel.id} className="col-12 col-md-6 col-lg-4">
-                            <div className="card shadow-sm border-0 h-100 travel-card">
+                            <div className="card shadow-sm border-0 h-100 travel-card position-relative">
+                                <div className="wishlist-icon" onClick={() => toggleWishlist(travel.id)}>
+                                    <i className={wishlist.includes(travel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
+                                </div>
+
                                 <div className="card-img-container">
                                     <img
                                         src={travel.cover_image}

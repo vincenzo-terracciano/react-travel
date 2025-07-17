@@ -6,10 +6,23 @@ import Loader from "../components/Loader";
 export default function TravelDetails() {
 
     const { id } = useParams();
-    const { selectedTravel, setSelectedTravel, fetchTravelById, getTravelDuration, loading } = useGlobalContext();
+    const { travels, selectedTravel, fetchTravelById, getTravelDuration, loading, wishlist, setWishlist } = useGlobalContext();
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const travel = travels.find(travel => travel.id === parseInt(id));
+
+    function toggleWishlist(id) {
+        let updatedWishlist;
+        if (wishlist.includes(id)) {
+            updatedWishlist = wishlist.filter(item => item !== id);
+        } else {
+            updatedWishlist = [...wishlist, id];
+        }
+        setWishlist(updatedWishlist);
+        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    }
 
     // funzione per il toggle
     function handleToggleSection(section) {
@@ -37,13 +50,8 @@ export default function TravelDetails() {
         category,
         departure_date,
         return_date,
-        duration_days,
         cover_image,
         tags,
-        itinerary_steps,
-        packing_items,
-        places,
-        photos
     } = selectedTravel;
 
     return (
@@ -53,7 +61,12 @@ export default function TravelDetails() {
                     <i className="fas fa-arrow-left me-1"></i> Torna ai viaggi
                 </Link>
 
-                <div className="card border-0 shadow travel-card mt-4">
+                <div className="card border-0 shadow travel-card mt-4 position-relative">
+
+                    <div className="wishlist-icon" onClick={() => toggleWishlist(selectedTravel.id)}>
+                        <i className={wishlist.includes(selectedTravel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
+                    </div>
+
                     <img src={cover_image} alt={title} className="card-img-top detail-img" />
 
                     <div className="card-body">

@@ -14,6 +14,10 @@ export default function GlobalProvider({ children }) {
     const [selectedTravel, setSelectedTravel] = useState(null);
     const [loading, setLoading] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [sortOrder, setSortOrder] = useState("desc");
+    const [wishlist, setWishlist] = useState(() => {
+        return JSON.parse(localStorage.getItem("wishlist")) || [];
+    });
 
     function fetchTravels() {
         if (travels.length > 0) return; // evita doppie fetch
@@ -42,7 +46,7 @@ export default function GlobalProvider({ children }) {
                 });
         }
 
-        getPage(); // inizia da pagina 1
+        getPage();
     }
 
 
@@ -84,6 +88,17 @@ export default function GlobalProvider({ children }) {
         setSelectedCategory(categoryName);
     };
 
+    function toggleWishlist(id) {
+        let updatedWishlist;
+        if (wishlist.includes(id)) {
+            updatedWishlist = wishlist.filter(item => item !== id);
+        } else {
+            updatedWishlist = [...wishlist, id];
+        }
+        setWishlist(updatedWishlist);
+        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+    }
+
     return (
         <>
             <GlobalContext.Provider value={{
@@ -103,6 +118,11 @@ export default function GlobalProvider({ children }) {
                 setSelectedCategory,
                 handlePageChange,
                 handleCategoryFilter,
+                sortOrder,
+                setSortOrder,
+                wishlist,
+                setWishlist,
+                toggleWishlist
             }}>
                 {children}
             </GlobalContext.Provider>

@@ -8,6 +8,7 @@ import Itinerary from "./pages/Itinerary"
 import Places from "./pages/Places"
 import PackingItems from "./pages/PackingItems"
 import Photos from "./pages/Photos"
+import Wishlist from "./pages/Wishlist"
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path="packing-items" Component={PackingItems} />
                 <Route path="photos" Component={Photos} />
               </Route>
+              <Route path="/wishlist" Component={Wishlist} />
             </Route>
           </Routes>
         </BrowserRouter>

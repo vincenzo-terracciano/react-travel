@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 
 export default function Header() {
 
     const [isOpen, setIsOpen] = useState(false);
+    const { wishlist } = useGlobalContext();
 
     return (
         <header>
@@ -30,7 +32,14 @@ export default function Header() {
                             <Link className="nav-item" to="/travels">Viaggi</Link>
                         </li>
                         <li>
-                            <Link className="nav-item" to="/categories">Categorie</Link>
+                            <NavLink to="/wishlist" className="nav-item wishlist-button">
+                                <i className={wishlist.length > 0 ? "fas fa-heart" : "far fa-heart"}></i>
+                                {wishlist.length > 0 && (
+                                    <span className={`wishlist-count ${wishlist.length > 0 ? "pulse" : ""}`}>
+                                        {wishlist.length}
+                                    </span>
+                                )}
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -40,7 +49,7 @@ export default function Header() {
             {isOpen && (
                 <div className="mobile-nav d-md-none text-center">
                     <Link className="mobile-link" to="/" onClick={() => setIsOpen(false)}>Home</Link>
-                    <Link className="mobile-link" to="/viaggi" onClick={() => setIsOpen(false)}>Viaggi</Link>
+                    <Link className="mobile-link" to="/travels" onClick={() => setIsOpen(false)}>Viaggi</Link>
                     <Link className="mobile-link" to="/itinerari" onClick={() => setIsOpen(false)}>Itinerari</Link>
                     <Link className="mobile-link" to="/packing-list" onClick={() => setIsOpen(false)}>Packing List</Link>
                     <Link className="mobile-link" to="/destinazioni" onClick={() => setIsOpen(false)}>Destinazioni</Link>
