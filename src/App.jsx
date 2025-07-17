@@ -32,7 +32,6 @@ function App() {
               </Route>
               <Route path="/wishlist" Component={Wishlist} />
               <Route path="/destinations" Component={Destinations} />
-
             </Route>
           </Routes>
         </BrowserRouter>
