@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const baseURL = 'http://localhost:8000/storage/';
+
 export default function TravelCard({ paginatedTravels, wishlist, toggleWishlist, handleCategoryFilter, }) {
 
     return (
@@ -14,7 +16,7 @@ export default function TravelCard({ paginatedTravels, wishlist, toggleWishlist,
 
                             <div className="card-img-container">
                                 <img
-                                    src={travel.cover_image}
+                                    src={baseURL + travel.cover_image}
                                     className="card-img-top"
                                     alt={travel.title}
                                 />

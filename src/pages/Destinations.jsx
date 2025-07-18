@@ -3,6 +3,8 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
+const baseURL = 'http://localhost:8000/storage/';
+
 export default function Destinations() {
     const { travels, fetchTravels, wishlist, toggleWishlist, handleCategoryFilter, selectedCountry, setSelectedCountry } = useGlobalContext();
 
@@ -51,7 +53,7 @@ export default function Destinations() {
                                     </div>
 
                                     <div className="card-img-container">
-                                        <img src={travel.cover_image} className="card-img-top" alt={travel.title} />
+                                        <img src={baseURL + travel.cover_image} className="card-img-top" alt={travel.title} />
                                     </div>
                                     <div className="card-body d-flex flex-column">
                                         <h5 className="card-title fw-semibold">{travel.title}</h5>

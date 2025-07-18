@@ -19,10 +19,6 @@ export default function Hero() {
         return () => clearInterval(interval);
     }, []);
 
-    const goToSlide = (newIndex) => setIndex(newIndex);
-    const prevSlide = () => setIndex((index - 1 + images.length) % images.length);
-    const nextSlide = () => setIndex((index + 1) % images.length);
-
     return (
         <>
             <section className="hero text-white d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(/img/${images[index]})` }}>

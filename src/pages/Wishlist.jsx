@@ -3,6 +3,8 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
+const baseURL = 'http://localhost:8000/storage/';
+
 export default function Wishlist() {
 
     const { travels, fetchTravels, loading, wishlist, toggleWishlist } = useGlobalContext();
@@ -37,7 +39,7 @@ export default function Wishlist() {
 
                                     <div className="card-img-container">
                                         <img
-                                            src={travel.cover_image}
+                                            src={baseURL + travel.cover_image}
                                             className="card-img-top"
                                             alt={travel.title}
                                         />

@@ -3,6 +3,8 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 
+const baseURL = 'http://localhost:8000/storage/';
+
 export default function TravelDetails() {
 
     const { id } = useParams();
@@ -67,7 +69,7 @@ export default function TravelDetails() {
                         <i className={wishlist.includes(selectedTravel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
                     </div>
 
-                    <img src={cover_image} alt={title} className="card-img-top detail-img" />
+                    <img src={baseURL + cover_image} alt={title} className="card-img-top detail-img" />
 
                     <div className="card-body">
                         <h2 className="fw-bold">{title}</h2>
