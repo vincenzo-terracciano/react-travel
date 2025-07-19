@@ -81,7 +81,7 @@ export default function TravelDetails() {
 
                         <p className="text-muted mb-3">
                             <strong>Durata:</strong> {getTravelDuration(selectedTravel.departure_date, selectedTravel.return_date)} giorni<br />
-                            <strong>Dal:</strong> {departure_date} <strong>al:</strong> {return_date}
+                            <strong>Dal:</strong> {new Date(departure_date).toLocaleDateString('it-IT')} <strong>al:</strong> {new Date(return_date).toLocaleDateString('it-IT')}
                         </p>
 
                         {tags?.length > 0 && (
