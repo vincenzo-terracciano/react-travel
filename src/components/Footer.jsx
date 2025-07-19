@@ -12,7 +12,7 @@ export default function Footer() {
                     {/* Logo + Social */}
                     <div className="footer-top d-flex justify-content-between align-items-center flex-wrap">
                         <Link to="/" className="logo">
-                            <img src="img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
+                            <img src="public/img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
                         </Link>
 
                         <div className="social-icons d-flex gap-3">

@@ -12,7 +12,7 @@ export default function Header() {
             <div className="container d-flex justify-content-between align-items-center py-3">
                 {/* Logo */}
                 <Link to="/" className="logo">
-                    <img src="img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
+                    <img src="public/img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
                 </Link>
 
                 {/* Hamburger */}
