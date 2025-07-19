@@ -11,14 +11,15 @@ export default function Header() {
         <header>
             <div className="container d-flex justify-content-between align-items-center py-3">
                 {/* Logo */}
-                <Link to="/" className="logo">VoyaGo</Link>
+                <Link to="/" className="logo">
+                    <img src="img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
+                </Link>
 
                 {/* Hamburger */}
                 <button
                     className="hamburger d-md-none"
                     onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Menu"
-                >
+                    aria-label="Menu">
                     <i className="bi bi-list"></i>
                 </button>
 

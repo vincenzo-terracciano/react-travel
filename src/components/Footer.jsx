@@ -11,7 +11,10 @@ export default function Footer() {
                 <div className="container">
                     {/* Logo + Social */}
                     <div className="footer-top d-flex justify-content-between align-items-center flex-wrap">
-                        <h5 className="logo">VoyaGo</h5>
+                        <Link to="/" className="logo">
+                            <img src="img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
+                        </Link>
+
                         <div className="social-icons d-flex gap-3">
                             <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="bi bi-facebook"></i></a>
                             <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="bi bi-instagram"></i></a>
