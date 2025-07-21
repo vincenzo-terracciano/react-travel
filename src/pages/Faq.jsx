@@ -49,14 +49,14 @@ export default function Faq() {
                         </h2>
                         <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div className="accordion-body">
-                                Visita la pagina <a href="/contatti" className="text-primary fw-bold">Contatti</a> per inviarci un messaggio. Il nostro team ti risponderà entro 24 ore.
+                                Visita la pagina <a href="/contacts" className="text-primary fw-bold">Contatti</a> per inviarci un messaggio. Il nostro team ti risponderà entro 24 ore.
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="text-center mt-5">
-                    <a href="/contatti" className="btn btn-primary">Hai altre domande? Contattaci</a>
+                    <a href="/contacts" className="btn btn-primary">Hai altre domande? Contattaci</a>
                 </div>
             </div>
         </main>

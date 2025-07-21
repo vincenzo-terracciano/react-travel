@@ -9,6 +9,21 @@ function formatTime(time) {
     return `${hour}:${minute}`;
 }
 
+function sortItinerarySteps(steps) {
+    return [...steps].sort((a, b) => {
+        // Prima per giorno
+        if (a.day_number !== b.day_number) {
+            return a.day_number - b.day_number;
+        }
+        // Poi per orario (se presente)
+        if (a.estimated_time && b.estimated_time) {
+            return a.estimated_time.localeCompare(b.estimated_time);
+        }
+        return 0;
+    });
+}
+
+
 export default function Itinerary() {
 
     const { selectedTravel } = useGlobalContext();
@@ -22,13 +37,15 @@ export default function Itinerary() {
         )
     }
 
+    const sortedSteps = sortItinerarySteps(selectedTravel.itinerary_steps);
+
     return (
         <>
             <div className="container py-5">
                 <h2 className="mb-4 fw-bold">Itinerario</h2>
 
                 <div className="timeline">
-                    {selectedTravel.itinerary_steps.map(step => {
+                    {sortedSteps.map(step => {
                         const place = selectedTravel.places.find(place => place.id === step.place_id);
                         return (
                             <div className="timeline-item mb-4 p-4 shadow-sm rounded bg-white" key={step.id}>

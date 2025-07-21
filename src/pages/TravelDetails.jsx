@@ -26,13 +26,23 @@ export default function TravelDetails() {
         localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     }
 
-    // funzione per il toggle
+    // funzione per i toggle in basso
     function handleToggleSection(section) {
         if (location.pathname.endsWith(`/${section}`)) {
             navigate(`/travels/${id}`); // torna indietro se sei già dentro
         } else {
             navigate(section); // altrimenti entra
+
+            // Scroll leggermente verso il basso
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 250,
+                    behavior: "smooth"
+                });
+            }, 200);
         }
+
+
     };
 
     useEffect(() => {
