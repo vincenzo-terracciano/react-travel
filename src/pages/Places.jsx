@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { useState } from "react";
 
 // 🔧 Crea un'icona personalizzata (fix per icone rotte in React/Vite)
 const customMarkerIcon = new L.Icon({
@@ -23,6 +24,7 @@ const customMarkerIcon = new L.Icon({
 export default function Places() {
 
     const { selectedTravel } = useGlobalContext();
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const places = selectedTravel?.places || [];
 
@@ -51,7 +53,10 @@ export default function Places() {
                         <div className="col-md-6 col-lg-4" key={place.id}>
                             <div className="card place-card h-100 shadow-sm rounded d-flex flex-column">
                                 {place.image && (
-                                    <img src={`http://localhost:8000/storage/${place.image}`} alt={place.name} className="place-img card-img-top" />
+                                    <img src={`http://localhost:8000/storage/${place.image}`}
+                                        alt={place.name}
+                                        className="place-img card-img-top"
+                                        onClick={() => setSelectedImage(`http://localhost:8000/storage/${place.image}`)} />
                                 )}
                                 <div className="card-body d-flex flex-column">
                                     <h5 className="card-title">{place.name}</h5>
@@ -119,6 +124,37 @@ export default function Places() {
                         ) : null
                     )}
                 </MapContainer>
+
+                {/* MODALE IMMAGINE */}
+                <div
+                    className={`modal fade ${selectedImage ? "show d-block" : ""}`}
+                    tabIndex="-1"
+                    onClick={() => setSelectedImage(null)}>
+
+                    <div
+                        className="modal-dialog modal-dialog-centered modal-lg"
+                        onClick={(e) => e.stopPropagation()}>
+
+                        <div className="modal-content">
+                            <div className="modal-header border-0">
+                                <button
+                                    type="button"
+                                    className="btn-close btn-close-white"
+                                    onClick={() => setSelectedImage(null)}
+                                ></button>
+                            </div>
+                            <div className="modal-body text-center">
+                                {selectedImage && (
+                                    <img
+                                        src={selectedImage}
+                                        alt="Place"
+                                        className="img-fluid rounded"
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
