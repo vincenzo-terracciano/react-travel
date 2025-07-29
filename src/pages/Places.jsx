@@ -139,7 +139,7 @@ export default function Places() {
                             <div className="modal-header border-0">
                                 <button
                                     type="button"
-                                    className="btn-close btn-close-white"
+                                    className="btn-close"
                                     onClick={() => setSelectedImage(null)}
                                 ></button>
                             </div>
