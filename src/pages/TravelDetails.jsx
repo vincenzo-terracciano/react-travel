@@ -7,31 +7,28 @@ const baseURL = 'http://localhost:8000/storage/';
 
 export default function TravelDetails() {
 
+    // hook per estratte l'id dalla URL
     const { id } = useParams();
-    const { travels, selectedTravel, fetchTravelById, getTravelDuration, loading, wishlist, setWishlist } = useGlobalContext();
+    const { travels, selectedTravel, fetchTravelById, getTravelDuration, loading, wishlist, setWishlist, toggleWishlist } = useGlobalContext();
 
+    // hook per cambiare pagina
     const navigate = useNavigate();
+
+    // hook per controllare la sezione attuale
     const location = useLocation();
 
-    const travel = travels.find(travel => travel.id === parseInt(id));
-
-    function toggleWishlist(id) {
-        let updatedWishlist;
-        if (wishlist.includes(id)) {
-            updatedWishlist = wishlist.filter(item => item !== id);
-        } else {
-            updatedWishlist = [...wishlist, id];
-        }
-        setWishlist(updatedWishlist);
-        localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    }
-
-    // funzione per i toggle in basso
+    // funzione per gestire i toggle delle sezioni in basso
     function handleToggleSection(section) {
+
+        // se il percorso attuale della pagina termina con una delle sezioni selezionate
         if (location.pathname.endsWith(`/${section}`)) {
-            navigate(`/travels/${id}`); // torna indietro se sei già dentro
+
+            // torna indietro non visualizzando la sezione (se il toggle è già aperto)
+            navigate(`/travels/${id}`);
         } else {
-            navigate(section); // altrimenti entra
+
+            // altrimenti entra e naviga nella sezione
+            navigate(section);
 
             // Scroll leggermente verso il basso
             setTimeout(() => {
@@ -41,15 +38,15 @@ export default function TravelDetails() {
                 });
             }, 200);
         }
-
-
     };
 
+    // Quando cambia l’id, recupero i dati del viaggio corrispondente da Laravel
     useEffect(() => {
         fetchTravelById(id);
         window.scrollTo({ top: 0 });
     }, [id])
 
+    /* Loader */
     if (loading || !selectedTravel) {
         return <Loader />;
     }
@@ -76,6 +73,8 @@ export default function TravelDetails() {
                 <div className="card border-0 travel-card mt-4 position-relative">
 
                     <div className="wishlist-icon" onClick={() => toggleWishlist(selectedTravel.id)}>
+
+                        {/* Mostra il cuore pieno o vuoto in base alla presenza del viaggio nei preferiti */}
                         <i className={wishlist.includes(selectedTravel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
                     </div>
 
@@ -85,6 +84,7 @@ export default function TravelDetails() {
                         <h2 className="fw-bold">{title}</h2>
                         <p className="text-muted mb-3">{destination_city}, {destination_country}</p>
 
+                        {/* Badge categoria cliccabile */}
                         <Link to="/travels" state={{ selectedCategory: category?.name }} className="category-badge category-badge-clickable mb-3 d-inline-block text-decoration-none">
                             <i className={`${category.icon} me-2`}></i>{category?.name}
                         </Link>
@@ -104,6 +104,7 @@ export default function TravelDetails() {
 
                         <p className="lead">{description}</p>
 
+                        {/* Toggle */}
                         <div className="row row-cols-2 row-cols-md-4 g-3 mt-4">
                             <div className="col">
                                 <div onClick={() => handleToggleSection("itinerary")} className="section-card text-decoration-none">
@@ -142,6 +143,7 @@ export default function TravelDetails() {
                 </div>
             </div>
 
+            {/* Componente che fa da segnaposto per mostrare il contenuto delle sezioni */}
             <Outlet />
         </>
     )

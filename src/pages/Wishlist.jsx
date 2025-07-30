@@ -9,13 +9,15 @@ export default function Wishlist() {
 
     const { travels, fetchTravels, loading, wishlist, toggleWishlist } = useGlobalContext();
 
-    // Filtra i viaggi presenti nella wishlist
+    // Filtro i viaggi presenti il cui id è presente nella wishlist
     const wishlistTravels = travels.filter(travel => wishlist.includes(travel.id));
 
+    // ottengo i viaggi al caricamento della pagina
     useEffect(() => {
         fetchTravels();
     }, []);
 
+    // se i viaggi non sono ancora caricati mostra un loader
     if (loading || !travels) {
         return <Loader />;
     }
@@ -25,14 +27,18 @@ export default function Wishlist() {
             <div className="container py-5">
                 <h1 className="mb-5 text-center fw-bold">Wishlist</h1>
 
+                {/* Se non salvo nessun viaggio nei preferiti, mostro un messaggio */}
                 {wishlistTravels.length === 0 ? (
                     <p className="text-center fs-4">Nessun viaggio nella tua wishlist.</p>
                 ) : (
                     <div className="row g-4">
                         {wishlistTravels.map((travel) => (
                             <div key={travel.id} className="col-12 col-md-6 col-lg-4">
+
+                                {/* Card viaggio */}
                                 <div className="card shadow-sm border-0 h-100 travel-card">
-                                    {/* Icona Wishlist */}
+
+                                    {/* Icona Wishlist per aggiungere o rimuovere il viaggio dalla wishlist */}
                                     <div className="wishlist-icon" onClick={() => toggleWishlist(travel.id)}>
                                         <i className={wishlist.includes(travel.id) ? "fas fa-heart text-danger" : "far fa-heart"}></i>
                                     </div>

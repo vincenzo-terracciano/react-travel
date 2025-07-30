@@ -9,6 +9,7 @@ export default function PackingItems() {
     // ordino gli oggetti obbligatori visualizzandoli per primi
     const items = [...(selectedTravel?.packing_items || [])].sort((a, b) => b.is_mandatory - a.is_mandatory);
 
+    // Se non ci sono oggetti nella lista, mostro un messaggio
     if (!items.length) {
         return (
             <div className="container py-5">
@@ -23,6 +24,7 @@ export default function PackingItems() {
             <div className="container py-5">
                 <h2 className="mb-4 fw-bold">Cosa portare in valigia</h2>
 
+                {/* Mostro ogni oggetto da mettere in valigia con checkbox e badge se è obbligatorio */}
                 <ul className="list-group shadow-sm packing-list">
                     {items.map(item => (
                         <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center packing-item">

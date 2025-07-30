@@ -6,27 +6,40 @@ import * as bootstrap from 'bootstrap';
 export default function Photos() {
 
     const { selectedTravel } = useGlobalContext();
+
+    // se esistono, recupero le foto del viaggio selezionato
     const photos = selectedTravel?.photos || [];
     const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+    // funzione per aprire la modale
     function openModal(index) {
+
+        // quando clicco su una foto, salvo l'indice della foto selezionata
         setSelectedPhoto(index);
+
+        // creo una nuova istanza della modale Bootstrap e la mostro
         const modal = new bootstrap.Modal(document.getElementById("photoModal"));
         modal.show();
     }
 
+    // funzione per chiudere la modale
     function closeModal() {
         setSelectedPhoto(null);
     }
 
+    // funzione per mostrare la foto precedente
     function prevPhoto() {
-        setSelectedPhoto((prev) => (prev > 0 ? prev - 1 : photos.length - 1));
+        // mostro la foto precedente e quando arrivo alla prima, torno all'ultima
+        setSelectedPhoto(prev => (prev > 0 ? prev - 1 : photos.length - 1));
     }
 
+    // funzione per mostrare la foto successiva
     function nextPhoto() {
-        setSelectedPhoto((prev) => (prev < photos.length - 1 ? prev + 1 : 0));
+        // mostro la foto successiva e quando arrivo all'ultima, torno alla prima
+        setSelectedPhoto(prev => (prev < photos.length - 1 ? prev + 1 : 0));
     }
 
+    // Se non ci sono foto mostro un messaggio
     if (!photos.length) {
         return (
             <div className="container py-5">
@@ -47,6 +60,8 @@ export default function Photos() {
                 <div className="row g-3">
                     {photos.map((photo, index) => (
                         <div className="col-6 col-md-4 col-lg-3" key={photo.id}>
+
+                            {/* Quando clicco sulla foto si apre la modale */}
                             <img
                                 src={`http://localhost:8000/storage/${photo.image}`}
                                 alt={photo.caption}
@@ -69,15 +84,17 @@ export default function Photos() {
                     <div className="modal-dialog modal-dialog-centered modal-lg">
                         <div className="modal-content">
                             <div className="modal-body">
+
+                                {/* Se c'è una foto selezionata allora la mostro all'apertura della modale */}
                                 {selectedPhoto !== null && (
                                     <>
-                                        {/* Immagine */}
+                                        {/* Foto */}
                                         <img
                                             src={`http://localhost:8000/storage/${photos[selectedPhoto].image}`}
                                             alt={photos[selectedPhoto].caption}
                                         />
 
-                                        {/* Frecce laterali */}
+                                        {/* Frecce laterali per navigare tra le foto */}
                                         <button className="modal-nav-btn left" onClick={prevPhoto}>
                                             <i className="fas fa-chevron-left"></i>
                                         </button>
@@ -88,7 +105,7 @@ export default function Photos() {
                                         {/* Caption */}
                                         <div className="modal-caption">{photos[selectedPhoto].caption}</div>
 
-                                        {/* Pulsante chiudi */}
+                                        {/* Pulsante per chiudere la modale */}
                                         <button
                                             type="button"
                                             className="modal-close-btn"
