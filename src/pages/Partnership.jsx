@@ -9,7 +9,7 @@ export default function Partnership() {
     return (
         <main className="partnership-page bg-light py-5">
             <div className="container">
-                <h1 className="text-center mb-4 fw-bold text-primary">Partnership</h1>
+                <h1 className="text-center mb-4 fw-bold">Partnership</h1>
                 <p className="text-center mb-5 text-muted">
                     Insieme possiamo ispirare milioni di viaggiatori.
                 </p>

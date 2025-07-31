@@ -7,12 +7,15 @@ export default function TravelPagination({ currentPage, lastPage, handlePageChan
                     <li onClick={() => handlePageChange(currentPage - 1)} className={currentPage === 1 ? 'disabled' : ''}>
                         &laquo;
                     </li>
+
+                    {/* Creo un array con la lunghezza delle pagine [1, 2] */}
                     {Array.from({ length: lastPage }, (_, i) => (
+
+                        /* Pagina numerata */
                         <li
                             key={i + 1}
                             onClick={() => handlePageChange(i + 1)}
-                            className={currentPage === i + 1 ? 'active' : ''}
-                        >
+                            className={currentPage === i + 1 ? 'active' : ''}>
                             {i + 1}
                         </li>
                     ))}
