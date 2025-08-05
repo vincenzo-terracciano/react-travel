@@ -1,6 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { createContext, useContext, useState } from "react";
 
 const GlobalContext = createContext();
 
@@ -159,7 +158,7 @@ export default function GlobalProvider({ children }) {
     )
 }
 
-// custom hook per utilizzare il contesto in qualunnque componente
+// custom hook per utilizzare il contesto in qualunque componente
 export function useGlobalContext() {
     return useContext(GlobalContext);
 }

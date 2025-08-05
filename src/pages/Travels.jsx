@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext"
 import { useEffect } from "react";
 import Loader from "../components/Loader";
@@ -11,7 +11,6 @@ export default function Travels() {
 
     const { travels, fetchTravels, currentPage, lastPage, loading, selectedCategory, setSelectedCategory, handlePageChange, handleCategoryFilter, sortOrder, setSortOrder, wishlist, toggleWishlist, searchQuery, setSearchQuery } = useGlobalContext();
 
-    // Hook di React Router per accedere ai dati di navigazione
     const location = useLocation();
     const travelsPerPage = 6;
 

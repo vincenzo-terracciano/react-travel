@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom"
 import { useGlobalContext } from "../context/GlobalContext";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
@@ -7,7 +7,6 @@ const baseURL = 'http://localhost:8000/storage/';
 
 export default function TravelDetails() {
 
-    // hook per estratte l'id dalla URL
     const { id } = useParams();
     const { travels, selectedTravel, fetchTravelById, getTravelDuration, loading, wishlist, setWishlist, toggleWishlist } = useGlobalContext();
 
