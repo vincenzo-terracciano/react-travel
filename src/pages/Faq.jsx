@@ -21,8 +21,8 @@ export default function Faq() {
                                 Cos'è VoyaGo e come funziona?
                             </button>
                         </h2>
-                        <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div className="accordion-body">
+                        <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div className="accordion-body bg-white">
                                 VoyaGo è la piattaforma che ti aiuta a pianificare viaggi, con itinerari personalizzati, packing list e ispirazione fotografica.
                             </div>
                         </div>

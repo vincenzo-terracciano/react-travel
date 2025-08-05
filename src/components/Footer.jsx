@@ -12,7 +12,7 @@ export default function Footer() {
                     {/* Logo + Social */}
                     <div className="footer-top d-flex justify-content-between align-items-center flex-wrap">
                         <Link to="/" className="logo">
-                            <img src="public/img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
+                            <img src="/img/logo-voyago.png" alt="VoyaGo" className="logo-img" />
                         </Link>
 
                         <div className="social-icons d-flex gap-3">
@@ -20,7 +20,7 @@ export default function Footer() {
                             <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="bi bi-instagram"></i></a>
                             <a href="https://tiktok.com" target="_blank" rel="noreferrer"><i className="bi bi-tiktok"></i></a>
                             <a href="https://youtube.com" target="_blank" rel="noreferrer"><i className="bi bi-youtube"></i></a>
-                            <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="bi bi-twitter"></i></a>
+                            <a href="https://twitter.com" target="_blank" rel="noreferrer"><i class="bi bi-twitter-x"></i></a>
                         </div>
                     </div>
 

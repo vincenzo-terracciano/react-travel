@@ -70,7 +70,7 @@ export default function AboutUs() {
                         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-danger"><i className="bi bi-instagram"></i></a>
                         <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="text-dark"><i className="bi bi-tiktok"></i></a>
                         <a href="https://youtube.com" target="_blank" rel="noreferrer" className="text-danger"><i className="bi bi-youtube"></i></a>
-                        <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-info"><i className="bi bi-twitter"></i></a>
+                        <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-dark"><i class="bi bi-twitter-x"></i></a>
                     </div>
                 </section>
             </main>
